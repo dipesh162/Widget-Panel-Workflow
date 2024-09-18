@@ -21,8 +21,8 @@ import 'reactflow/dist/style.css';
 
 // Components
 import ButtonEdge from './ButtonEdge.tsx';
-// import SelfConnectingEdge from './SelfConnectingEdge';
-// import BiDirectionalEdge from './BiDirectionalEdge';
+import SelfConnectingEdge from './SelfConnectingEdge';
+import BiDirectionalEdge from './BiDirectionalEdge';
 import BiDirectionalNode from './BiDirectionalNode';
 import AddWorkflowPopup from '../AddWorkflowPopup';
 import StraightLineConnection from '../StraightLineConnection'; // Import your custom line
