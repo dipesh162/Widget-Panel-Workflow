@@ -21,11 +21,11 @@ import 'reactflow/dist/style.css';
 
 // Components
 import ButtonEdge from './ButtonEdge.tsx';
-import SelfConnectingEdge from './SelfConnectingEdge';
-import BiDirectionalEdge from './BiDirectionalEdge';
-import BiDirectionalNode from './BiDirectionalNode';
+// import SelfConnectingEdge from './SelfConnectingEdge';
+// import BiDirectionalEdge from './BiDirectionalEdge';
+// import BiDirectionalNode from './BiDirectionalNode';
 import AddWorkflowPopup from '../AddWorkflowPopup';
-import StraightLineConnection from '../StraightLineConnection'; // Import your custom line
+// import StraightLineConnection from '../StraightLineConnection'; // Import your custom line
 
 // const edgeTypes = {
 //   bidirectional: BiDirectionalEdge,
@@ -33,9 +33,9 @@ import StraightLineConnection from '../StraightLineConnection'; // Import your c
 //   buttonedge: ButtonEdge,
 // };
 
-const nodeTypes = {
-  bidirectional: BiDirectionalNode,
-};
+// const nodeTypes = {
+//   bidirectional: BiDirectionalNode,
+// };
 
 
 const WorkflowPanel = () => {
@@ -157,7 +157,7 @@ const WorkflowPanel = () => {
         fitView
         // edgeTypes={edgeTypes}
         // edgeTypes={{ straight: StraightLineConnection }} // Specify custom edge type
-        nodeTypes={nodeTypes}
+        // nodeTypes={nodeTypes}
       >
         <MiniMap />
         <Controls />
