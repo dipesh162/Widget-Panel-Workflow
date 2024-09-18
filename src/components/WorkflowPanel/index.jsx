@@ -14,7 +14,7 @@ import ReactFlow, {
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { updateNodes, updateEdges, toggleEditMode, saveWorkflow, loadWorkflow, addNode } from '../../redux/workflowSlice';
+import { updateNodes, updateEdges, toggleEditMode, saveWorkflow, loadWorkflow, addNode, updateNode } from '../../redux/workflowSlice';
 
 // Styles
 import 'reactflow/dist/style.css';

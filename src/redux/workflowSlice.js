@@ -93,6 +93,12 @@ export const workflowSlice = createSlice({
     updateNodes: (state, action) => {
       state.nodes = action.payload.nodes; // Update the nodes when changes are made
     },
+    updateNode: (state, action) => {
+      const nodeIndex = state.nodes.findIndex((node) => node.id === action.payload.id);
+      if (nodeIndex !== -1) {
+        state.nodes[nodeIndex] = { ...state.nodes[nodeIndex], ...action.payload }; // Update the node's details
+      }
+    },
     updateEdges: (state, action) => {
       state.edges = action.payload.edges; // Update the edges when changes are made
     },
@@ -113,6 +119,6 @@ export const workflowSlice = createSlice({
   },
 });
 
-export const { addNode, addEdge, toggleEditMode, updateNodes, updateEdges, saveWorkflow, loadWorkflow } = workflowSlice.actions;
+export const { addNode, addEdge, toggleEditMode, updateNodes, updateEdges, saveWorkflow, loadWorkflow, updateNode } = workflowSlice.actions;
 
 export default workflowSlice.reducer;
