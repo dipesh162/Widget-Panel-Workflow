@@ -1,4 +1,7 @@
+// React
 import React, { useState, useEffect } from 'react';
+
+// Styles
 import './AddWorkflowPopup.css'
 
 const AddWorkflowPopup = ({ node, onClose, onAddNode, onUpdateNode }) => {

@@ -1,4 +1,4 @@
-// src/components/WorkflowPanel.js
+// React
 import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, {
   MiniMap,
@@ -11,15 +11,19 @@ import ReactFlow, {
   applyNodeChanges,
   // Edge,
 } from 'reactflow';
+
+// Redux
 import { useDispatch, useSelector } from 'react-redux';
+import { updateNodes, updateEdges, toggleEditMode, saveWorkflow, loadWorkflow, addNode } from '../../redux/workflowSlice';
+
+// Styles
 import 'reactflow/dist/style.css';
 
+// Components
 import ButtonEdge from './ButtonEdge.tsx';
 import SelfConnectingEdge from './SelfConnectingEdge';
 import BiDirectionalEdge from './BiDirectionalEdge';
 import BiDirectionalNode from './BiDirectionalNode';
-
-import { updateNodes, updateEdges, toggleEditMode, saveWorkflow, loadWorkflow, addNode } from '../../redux/workflowSlice';
 import AddWorkflowPopup from '../AddWorkflowPopup';
 import StraightLineConnection from '../StraightLineConnection'; // Import your custom line
 

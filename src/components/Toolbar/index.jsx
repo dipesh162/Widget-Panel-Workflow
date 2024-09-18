@@ -1,8 +1,14 @@
-// src/components/Toolbar.js
+// React
 import React, { useState } from 'react';
+
+// Redux
 import { useDispatch, useSelector } from 'react-redux';
-import AddWorkflowPopup from '../AddWorkflowPopup';
 import { toggleEditMode, saveWorkflow } from '../../redux/workflowSlice';
+
+// Components
+import AddWorkflowPopup from '../AddWorkflowPopup';
+
+// Styles
 import './Toolbar.css';
 
 export const Toolbar = () => {

@@ -2,10 +2,46 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
   MarkerType,
+  // Position
 } from '@xyflow/react';
 
 const initialState = {
-  nodes: [], // Stores workflow nodes
+  nodes: [
+    // {
+    //   id: 'button-1',
+    //   type: 'input',
+    //   data: { label: 'Button Edge 1' },
+    //   position: { x: 125, y: 0 },
+    // },
+    // {
+    //   id: 'button-2',
+    //   data: { label: 'Button Edge 2' },
+    //   position: { x: 125, y: 200 },
+    // },
+    // {
+    //   id: 'bi-1',
+    //   data: { label: 'Bi Directional 1' },
+    //   position: { x: 0, y: 300 },
+    //   type: 'bidirectional',
+    //   // sourcePosition: Position.Right,
+    //   // targetPosition: Position.Left,
+    // },
+    // {
+    //   id: 'bi-2',
+    //   data: { label: 'Bi Directional 2' },
+    //   position: { x: 250, y: 300 },
+    //   type: 'bidirectional',
+    //   // sourcePosition: Position.Right,
+    //   // targetPosition: Position.Left,
+    // },
+    // {
+    //   id: 'self-1',
+    //   data: { label: 'Self Connecting' },
+    //   position: { x: 125, y: 500 },
+    //   // sourcePosition: Position.Right,
+    //   // targetPosition: Position.Left,
+    // },
+  ], // Stores workflow nodes
   edges: [
     {
       id: 'edge-button',
@@ -38,34 +74,6 @@ const initialState = {
       type: 'selfconnecting',
       markerEnd: { type: MarkerType.Arrow },
     },
-    // {
-    //   type: 'straight',
-    //   source: '1',
-    //   target: '2',
-    //   id: '1',
-    //   label: 'straight',
-    // },
-    // {
-    //   type: 'step',
-    //   source: '2',
-    //   target: '3',
-    //   id: '2',
-    //   label: 'step',
-    // },
-    // {
-    //   type: 'smoothstep',
-    //   source: '3',
-    //   target: '4',
-    //   id: '3',
-    //   label: 'smoothstep',
-    // },
-    // {
-    //   type: 'bezier',
-    //   source: '4',
-    //   target: '5',
-    //   id: '4',
-    //   label: 'bezier',
-    // },
   ], // Stores edges between nodes
   isEditing: false, // Tracks whether edit mode is on or off
 };

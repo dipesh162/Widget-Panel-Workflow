@@ -1,4 +1,4 @@
-// src/components/StraightLineConnection.js
+// React
 import React from 'react';
 import { useReactFlow } from 'reactflow';
 
