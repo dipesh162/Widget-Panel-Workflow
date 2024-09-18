@@ -26,7 +26,7 @@ export const getSpecialPath = (
   } ${targetX} ${targetY}`;
 };
 
-export default function CustomEdge({
+export default function BiDirectionalEdge({
   source,
   target,
   sourceX,
