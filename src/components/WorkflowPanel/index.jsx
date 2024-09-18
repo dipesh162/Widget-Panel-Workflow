@@ -91,11 +91,16 @@ const WorkflowPanel = () => {
   };
 
   const handleEditToggle = () => {
-    dispatch(toggleEditMode());
+    const nodesLength = nodes.length
+    if(nodesLength>0){
+      dispatch(toggleEditMode());
+    } else {
+      alert('Add nodes to edit', nodesLength)
+    }
   };
 
   const handleSave = () => {
-    const nodesLength = nodes.nodesLength
+    const nodesLength = nodes.length
     if(nodesLength>1){
       dispatch(saveWorkflow());
     } else {
