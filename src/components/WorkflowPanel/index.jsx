@@ -155,7 +155,7 @@ const WorkflowPanel = () => {
         onConnect={handleConnect}
         onNodeClick={handleNodeClick}
         fitView
-        edgeTypes={edgeTypes}
+        // edgeTypes={edgeTypes}
         // edgeTypes={{ straight: StraightLineConnection }} // Specify custom edge type
         nodeTypes={nodeTypes}
       >
