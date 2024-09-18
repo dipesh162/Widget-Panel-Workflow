@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+// src/components/WorkflowPanel.js
+import React, { useCallback, useState, useEffect } from 'react';
 import ReactFlow, {
   MiniMap,
   Controls,
@@ -8,51 +9,49 @@ import ReactFlow, {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
+  // Edge,
 } from 'reactflow';
-import CustomNode from './CustomNode'; // Import your custom node
-
 import { useDispatch, useSelector } from 'react-redux';
 import 'reactflow/dist/style.css';
-import {
-  updateNodes,
-  updateEdges,
-  toggleEditMode,
-  saveWorkflow,
-  addNode,
-  updateNode, // Import updateNode action
-} from '../../redux/workflowSlice';
-import AddWorkflowPopup from '../AddWorkflowPopup'; // Popup component
 
+import ButtonEdge from './ButtonEdge.tsx';
+import SelfConnectingEdge from './SelfConnectingEdge';
+import BiDirectionalEdge from './BiDirectionalEdge';
+import BiDirectionalNode from './BiDirectionalNode';
+
+import { updateNodes, updateEdges, toggleEditMode, saveWorkflow, loadWorkflow, addNode } from '../../redux/workflowSlice';
+import AddWorkflowPopup from '../AddWorkflowPopup';
+import StraightLineConnection from '../StraightLineConnection'; // Import your custom line
+
+const edgeTypes = {
+  bidirectional: BiDirectionalEdge,
+  selfconnecting: SelfConnectingEdge,
+  buttonedge: ButtonEdge,
+};
 
 const nodeTypes = {
-  customNode: CustomNode, // Register the custom node type
+  bidirectional: BiDirectionalNode,
 };
+
 
 const WorkflowPanel = () => {
   const dispatch = useDispatch();
   const { nodes, edges, isEditing } = useSelector((state) => state.workflow);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedNode, setSelectedNode] = useState(null);
-
   
-
-  // Initialize local node and edge state
   const [localNodes, setLocalNodes, onNodesChange] = useNodesState(nodes);
   const [localEdges, setLocalEdges, onEdgesChange] = useEdgesState(edges);
 
-  // Sync local state with Redux state
-  React.useEffect(() => {
+  useEffect(() => {
     setLocalNodes(nodes);
     setLocalEdges(edges);
   }, [nodes, edges, setLocalNodes, setLocalEdges]);
 
-  // React.useEffect(()=>{
-  //   if(isEditing){
-  //     setShowPopup(true)
-  //   }
-  // },[isEditing])
+  useEffect(() => {
+    dispatch(loadWorkflow());
+  }, [dispatch]);
 
-  // Handle node changes
   const handleNodesChange = useCallback(
     (changes) => {
       const updatedNodes = applyNodeChanges(changes, localNodes);
@@ -62,7 +61,6 @@ const WorkflowPanel = () => {
     [dispatch, localNodes, setLocalNodes]
   );
 
-  // Handle edge changes
   const handleEdgesChange = useCallback(
     (changes) => {
       const updatedEdges = applyEdgeChanges(changes, localEdges);
@@ -72,7 +70,6 @@ const WorkflowPanel = () => {
     [dispatch, localEdges, setLocalEdges]
   );
 
-  // Handle node connections
   const handleConnect = useCallback(
     (params) => {
       const updatedEdges = addEdge(params, localEdges);
@@ -82,43 +79,41 @@ const WorkflowPanel = () => {
     [dispatch, localEdges, setLocalEdges]
   );
 
-  // Handle node click (for selection or editing)
   const handleNodeClick = (event, node) => {
     if (isEditing) {
-      setSelectedNode(node); // Set the selected node for editing
-      setShowPopup(true); // Open popup to edit node
+      setSelectedNode(node);
+      setShowPopup(true);
     }
   };
 
-  // Toggle editing mode
   const handleEditToggle = () => {
     dispatch(toggleEditMode());
   };
 
-  // Save workflow
   const handleSave = () => {
-    dispatch(saveWorkflow()); // Save workflow to Redux or backend
+    const nodesLength = nodes.nodesLength
+    if(nodesLength>1){
+      dispatch(saveWorkflow());
+    } else {
+      alert('Add 2 or more node to save')
+    }
   };
 
-  // Show popup to add or edit a node
   const handleShowPopup = (node = null) => {
-    setSelectedNode(node); // If node is null, it's for adding a new one
+    setSelectedNode(node);
     setShowPopup(true);
   };
 
-  // Hide popup
   const handleClosePopup = () => {
     setShowPopup(false);
     setSelectedNode(null);
   };
 
-  // Add a new node from the popup
   const handleAddNode = (newNode) => {
     dispatch(addNode(newNode));
     handleClosePopup();
   };
 
-  // Update an existing node from the popup
   const handleUpdateNode = (updatedNode) => {
     dispatch(updateNode(updatedNode));
     handleClosePopup();
@@ -148,10 +143,12 @@ const WorkflowPanel = () => {
         edges={localEdges}
         onNodesChange={handleNodesChange}
         onEdgesChange={handleEdgesChange}
-        onConnect={handleConnect} // Handle node connection logic
-        onNodeClick={handleNodeClick} // Enable node editing
-        nodeTypes={nodeTypes} // Pass the custom node types
+        onConnect={handleConnect}
+        onNodeClick={handleNodeClick}
         fitView
+        edgeTypes={edgeTypes}
+        // edgeTypes={{ straight: StraightLineConnection }} // Specify custom edge type
+        nodeTypes={nodeTypes}
       >
         <MiniMap />
         <Controls />
